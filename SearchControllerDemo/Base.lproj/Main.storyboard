@@ -116,6 +116,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="IZo-rp-LJJ" id="6f8-qC-ahZ"/>
+                                    <outlet property="delegate" destination="IZo-rp-LJJ" id="1fB-m3-Rw6"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <constraints>
@@ -125,6 +129,10 @@
                             <constraint firstAttribute="trailing" secondItem="wLC-a5-UWF" secondAttribute="trailing" id="eHc-GO-ZXW"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <connections>
+                        <outlet property="tableView" destination="wLC-a5-UWF" id="d2V-dY-en0"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TkP-CD-3eD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchControllerDelegate {
 
     @IBOutlet private weak var tableView: UITableView!
     
@@ -28,7 +28,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchController = UISearchController(searchResultsController: storyboard?.instantiateViewController(withIdentifier: SearchDisplayViewController.storyboardId))
+        let displayController = storyboard?.instantiateViewController(withIdentifier: SearchDisplayViewController.storyboardId) as! SearchDisplayViewController
+        searchController = UISearchController(searchResultsController: displayController)
+        searchController.delegate = self
+        searchController.searchResultsUpdater = displayController
         tableView.tableHeaderView = searchController.searchBar
     }
 
@@ -57,6 +60,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 64
+    }
+    
+    // MARK: UISearchControllerDelegate
+    
+    func willPresentSearchController(_ searchController: UISearchController) {
+        guard let viewController = searchController.searchResultsController as? SearchDisplayViewController else {
+            return
+        }
+        
+        viewController.recipients = recipients
     }
 }
 

@@ -14,16 +14,18 @@ class SearchCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
 }
 
-class SearchDisplayViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SearchDisplayViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
     
     static let storyboardId = "SearchDisplayViewController"
+    @IBOutlet weak var tableView: UITableView!
     
-    let recipients: [Recipient] = []
+    var recipients: [Recipient] = []
+    private var filteredRecipients: [Recipient] = []
     
     // MARK: UITableViewDataSource
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recipients.count
+        return filteredRecipients.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -31,7 +33,7 @@ class SearchDisplayViewController: UIViewController, UITableViewDataSource, UITa
             fatalError()
         }
         
-        let recipient = recipients[indexPath.row]
+        let recipient = filteredRecipients[indexPath.row]
         cell.nameLabel.text = recipient.fullName()
         return cell
     }
@@ -40,6 +42,20 @@ class SearchDisplayViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
+    }
+    
+    // MARK: UISearchResultsUpdating
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else {
+            return
+        }
+        
+        filteredRecipients = recipients.filter { (recipient: Recipient) -> Bool in
+            let searchableName = recipient.fullName().replacingOccurrences(of: " ", with: "").lowercased()
+            return searchableName.contains(searchText.lowercased())
+        }
+        tableView.reloadData()
     }
     
 }
