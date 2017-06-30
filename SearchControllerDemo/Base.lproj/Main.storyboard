@@ -53,6 +53,7 @@
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="zAQ-56-zbg"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="x14-EZ-U7e"/>
                                 </connections>
                             </tableView>
                         </subviews>
@@ -66,21 +67,68 @@
                     </view>
                     <navigationItem key="navigationItem" id="Uud-BY-woz"/>
                     <connections>
-                        <outlet property="searchDisplayController" destination="I8p-BX-V3e" id="g1L-8w-T69"/>
                         <outlet property="tableView" destination="HOb-5o-YeR" id="IJ2-vA-oM5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="I8p-BX-V3e">
-                    <connections>
-                        <outlet property="delegate" destination="BYZ-38-t0r" id="7Tf-n3-yFc"/>
-                        <outlet property="searchContentsController" destination="BYZ-38-t0r" id="jc3-l8-J2u"/>
-                        <outlet property="searchResultsDataSource" destination="BYZ-38-t0r" id="Sz2-P7-sGk"/>
-                        <outlet property="searchResultsDelegate" destination="BYZ-38-t0r" id="NeE-Ff-2sp"/>
-                    </connections>
-                </searchDisplayController>
+                <searchDisplayController id="I8p-BX-V3e"/>
             </objects>
             <point key="canvasLocation" x="1079.2" y="138.98050974512745"/>
+        </scene>
+        <!--Search Display View Controller-->
+        <scene sceneID="OWv-N5-xry">
+            <objects>
+                <viewController storyboardIdentifier="SearchDisplayViewController" automaticallyAdjustsScrollViewInsets="NO" id="IZo-rp-LJJ" customClass="SearchDisplayViewController" customModule="SearchControllerDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oau-IQ-6ek"/>
+                        <viewControllerLayoutGuide type="bottom" id="Owg-Df-shS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="KdR-5Y-TJF">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wLC-a5-UWF">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SearchCell" id="Txd-Dg-jf9" customClass="SearchCell" customModule="SearchControllerDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Txd-Dg-jf9" id="1BT-nV-jEN">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6vx-W5-vjy">
+                                                    <rect key="frame" x="8" y="15" width="359" height="14.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="6vx-W5-vjy" firstAttribute="centerY" secondItem="1BT-nV-jEN" secondAttribute="centerY" id="dO0-hw-2PF"/>
+                                                <constraint firstItem="6vx-W5-vjy" firstAttribute="leading" secondItem="1BT-nV-jEN" secondAttribute="leading" constant="8" id="mxT-9I-I6U"/>
+                                                <constraint firstAttribute="trailing" secondItem="6vx-W5-vjy" secondAttribute="trailing" constant="8" id="uNK-jK-4HZ"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="6vx-W5-vjy" id="HBD-pB-V1Z"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="wLC-a5-UWF" firstAttribute="top" secondItem="oau-IQ-6ek" secondAttribute="bottom" id="0as-ZY-utp"/>
+                            <constraint firstItem="wLC-a5-UWF" firstAttribute="leading" secondItem="KdR-5Y-TJF" secondAttribute="leading" id="PGz-O8-VKr"/>
+                            <constraint firstItem="Owg-Df-shS" firstAttribute="top" secondItem="wLC-a5-UWF" secondAttribute="bottom" id="dbb-If-UOT"/>
+                            <constraint firstAttribute="trailing" secondItem="wLC-a5-UWF" secondAttribute="trailing" id="eHc-GO-ZXW"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TkP-CD-3eD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1853.5999999999999" y="139.880059970015"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZPY-s7-Ugy">

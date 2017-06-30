@@ -8,12 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDataSource, UISearchResultsUpdating {
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        
-    }
-
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet private weak var tableView: UITableView!
     
@@ -29,13 +24,11 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchResultsUp
                                            Recipient(firstName: "Victoria", lastName: "Boska"),
                                            Recipient(firstName: "Iza", lastName: "Aftyka")]
     
-    let searchController = UISearchController(searchResultsController: nil)
+    private var searchController: UISearchController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = false
-        definesPresentationContext = true
+        searchController = UISearchController(searchResultsController: storyboard?.instantiateViewController(withIdentifier: SearchDisplayViewController.storyboardId))
         tableView.tableHeaderView = searchController.searchBar
     }
 
@@ -59,6 +52,11 @@ class ViewController: UIViewController, UITableViewDataSource, UISearchResultsUp
         cell.recipientNameLabel.text = recipient.fullName()
         return cell
     }
+    
+    // MARK: UITableViewDelegate
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 64
+    }
 }
 
